@@ -18,8 +18,8 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
     - [X] Mapa
     - [ ] Barra de Pesquisa
     - [X] Menu Lateral
-    - [ ] Menu de Ajuda
-        - [ ] Menu aberto
+    - [ ] Menu de Ajuda (mobile)
+        - [ ] Menu aberto (mobile)
     - [ ] Adicionar denúncia ao clicar no mapa
         - [ ] Formulário de denúncia
     - [ ] Clicar em uma denúncia
@@ -45,9 +45,9 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
             - [ ] Ver denúncia
             - [ ] Marcar como resolvido
             - [ ] Editar denúncia
-    - [ ] Histórico
+    - [ ] Histórico (opcional)
         - [ ] Listar denúncias em que o usuário já se voluntariou
-    - [ ] Sobre
+    - [ ] Sobre (opcional)
     - [ ] Sair da conta
 
 ## Tecnologias utilizadas
