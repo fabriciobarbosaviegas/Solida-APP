@@ -41,6 +41,7 @@ const Map = () => {
     const newMarker = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
+      id: new Date().getTime()
     };
     setMarkers((current) => [...current, newMarker]);
   };
@@ -56,6 +57,10 @@ const Map = () => {
     }
   };
 
+  const handleMarkerClick = (id) => {
+    setMarkers((current) => current.filter((marker) => marker.id !== id));
+  };
+
   return (
     <LoadScript googleMapsApiKey="" libraries={libraries}>
       <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} />
@@ -66,8 +71,12 @@ const Map = () => {
         options={mapOptions}
         onClick={handleMapClick}
       >
-        {markers.map((marker, index) => (
-          <Marker key={index} position={marker} />
+        {markers.map((marker) => (
+          <Marker
+            key={marker.id}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            onClick={() => handleMarkerClick(marker.id)}
+          />
         ))}
       </GoogleMap>
     </LoadScript>
