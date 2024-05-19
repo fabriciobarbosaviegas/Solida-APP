@@ -25,6 +25,7 @@ const Map = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setCenter({ lat: latitude, lng: longitude });
+          setMarkers([{ lat: latitude, lng: longitude }]);
           setZoom(16);
         },
         () => {
