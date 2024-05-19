@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { Box, Flex } from '@chakra-ui/react';
 import Search from '../Search/Search'; 
+import PinDenuncia from '../../assets/PinDenuncia.svg'
 
 const mapContainerStyle = {
   width: '100%',
@@ -81,6 +82,9 @@ const Map = () => {
           <Marker
             key={marker.id}
             position={{ lat: marker.lat, lng: marker.lng }}
+            icon={{
+              url: PinDenuncia,
+            }}
             onClick={() => handleMarkerClick(marker.id)}
           />
         ))}
