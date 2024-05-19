@@ -12,7 +12,7 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
 2. [Tecnologias utilizadas](#tecnologias-utilizadas)
 
 ## Modificações em progresso
-- [ ] Definição da API de mapa a ser utilizada
+- [X] Definição da API de mapa a ser utilizada (Google Maps)
     - [ ] Implementação da API
 - [ ] Criação da página inicial
     - [ ] Mapa
