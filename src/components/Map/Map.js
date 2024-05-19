@@ -46,6 +46,7 @@ const Map = () => {
     };
     setMarkers((current) => [...current, newMarker]);
   };
+  
 
   const handlePlaceSelect = () => {
     if (autocomplete !== null) {
