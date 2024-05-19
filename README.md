@@ -13,7 +13,7 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
 
 ## Modificações em progresso
 - [X] Definição da API de mapa a ser utilizada (Google Maps)
-    - [ ] Implementação da API
+    - [X] Implementação da API
 - [ ] Criação da página inicial
     - [ ] Mapa
     - [ ] Barra de Pesquisa

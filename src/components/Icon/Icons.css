@@ -1,0 +1,35 @@
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0.25rem auto 0.75rem;
+  }
+  
+  .icon-image {
+    width: 3rem; /* Tamanho médio */
+    height: auto;
+  }
+  
+  .icon-text {
+    text-align: center;
+    font-size: 12px;
+  }
+  @media (max-width: 768px){
+    .icon-image {
+      width: 1.75rem; /* Tamanho médio */
+      height: auto;
+    }
+  }
+  @media (max-width: 568px){
+    .icon-image {
+      width: 1.25rem; /* Tamanho médio */
+      height: auto;
+    }
+  }
+  @media (max-width: 197px){
+    .icon-image {
+      width: 0.75rem; /* Tamanho médio */
+      height: auto;
+    }
+  }
