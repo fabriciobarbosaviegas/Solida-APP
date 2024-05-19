@@ -1,13 +1,15 @@
 // Icon.js
 import React from 'react';
-import './Icons.css';
+import { Box, Image, Text, useBreakpointValue } from '@chakra-ui/react';
 
 const Icon = ({ ImgSrc, text }) => {
+  const size = useBreakpointValue({ base: "1.75rem", sm: "1rem", md: "1.75rem", lg: "3rem" });
+
   return (
-    <div className="icon">
-      <img src={ImgSrc} alt={text} className="icon-image" />
-      <span className="icon-text">{text}</span>
-    </div>
+    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" m="0.25rem auto 0.75rem">
+      <Image src={ImgSrc} alt={text} boxSize={size} />
+      <Text textAlign="center" fontSize="12px" minH="20px">{text}</Text>
+    </Box>
   );
 };
 
