@@ -21,6 +21,7 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
     - [ ] Menu de Ajuda (mobile)
         - [ ] Menu aberto (mobile)
     - [ ] Adicionar denúncia ao clicar no mapa
+        - [ ] Adicionar ponto no mapa
         - [ ] Formulário de denúncia
     - [ ] Clicar em uma denúncia
         - [ ] Abrir denúncia
