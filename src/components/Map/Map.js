@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, Marker, Autocomplete } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import Search from '../Search/Search'; 
 
 const mapContainerStyle = {
   width: '100%',
@@ -57,9 +58,7 @@ const Map = () => {
 
   return (
     <LoadScript googleMapsApiKey="" libraries={libraries}>
-      <Autocomplete onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect}>
-        <input type="text" placeholder="Search for places..." />
-      </Autocomplete>
+      <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
