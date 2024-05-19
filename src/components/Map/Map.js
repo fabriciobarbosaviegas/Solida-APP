@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { Box, Flex } from '@chakra-ui/react';
 import Search from '../Search/Search'; 
 
 const mapContainerStyle = {
@@ -63,7 +64,11 @@ const Map = () => {
 
   return (
     <LoadScript googleMapsApiKey="" libraries={libraries}>
-      <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} />
+       <Flex justify="flex-end">
+        <Box position="absolute" top="10px" right="10px" zIndex="1">
+          <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} size="sm" />
+        </Box>
+      </Flex>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
