@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
      <ChakraProvider>
         <Sidebar></Sidebar>
-        <Map />
+         <Map />
      </ChakraProvider>
   </React.StrictMode>
 );
