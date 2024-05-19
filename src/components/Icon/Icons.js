@@ -1,6 +1,6 @@
 // Icon.js
 import React from 'react';
-import './Icon.css';
+import './Icons.css';
 
 const Icon = ({ ImgSrc, text }) => {
   return (

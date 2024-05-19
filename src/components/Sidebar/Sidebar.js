@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
-import Icon from '../Icon/Icon';
+import Icon from '../Icon/Icons';
 import WarningIcon from '../../assets/DenunciaIcon.svg'
 import MapIcon from '../../assets/MapIcon.svg'
 import UserIcon from '../../assets/UserIcon.svg'
