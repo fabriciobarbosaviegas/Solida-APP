@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, VStack, Heading, Stack, Image } from '@chakra-ui/react';
+import { Box, Button, VStack, Stack} from '@chakra-ui/react';
 import { SettingsIcon, EditIcon, RepeatClockIcon, InfoOutlineIcon, WarningTwoIcon } from '@chakra-ui/icons'
 import UserIcon from '../UserIcon/UserIcon';
 
