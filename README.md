@@ -46,9 +46,6 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
             - [ ] Ver denúncia
             - [ ] Marcar como resolvido
             - [ ] Editar denúncia
-    - [ ] Histórico (opcional)
-        - [ ] Listar denúncias em que o usuário já se voluntariou
-    - [ ] Sobre (opcional)
     - [ ] Sair da conta
 
 ## Tecnologias utilizadas
