@@ -1,19 +1,45 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Map  from "./components/Map/Map";
 import Sidebar from './components/Sidebar/Sidebar';
 import { ChakraProvider } from '@chakra-ui/react'
+import AuthForm from './components/AuthForm/AuthForm';
 
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
+const App = () => {
+   const [isAuthenticated, setIsAuthenticated] = useState(false);
+ 
+   const handleLogin = (credentials) => {
+     // Lógica para autenticação
+     console.log('Login:', credentials);
+     setIsAuthenticated(true);
+   };
+ 
+   const handleSignup = (credentials) => {
+     // Lógica para cadastro
+     console.log('Signup:', credentials);
+     setIsAuthenticated(true);
+   };
+ 
+   return (
      <ChakraProvider>
-        <Sidebar></Sidebar>
-         <Map />
+       {isAuthenticated ? (
+         <>
+           <Sidebar />
+           <Map />
+         </>
+       ) : (
+         <AuthForm onLogin={handleLogin} onSignup={handleSignup} />
+       )}
      </ChakraProvider>
-  </React.StrictMode>
-);
-
+   );
+ };
+ 
+ const root = ReactDOM.createRoot(document.getElementById('root'));
+ root.render(
+   <React.StrictMode>
+     <App />
+   </React.StrictMode>
+ );

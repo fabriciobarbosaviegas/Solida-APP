@@ -87,7 +87,7 @@ const ReportForm = ({ isOpen, onClose, onSubmit, initialLocation }) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
+          <Button colorScheme="red" mr={3} onClick={handleSubmit}>
             Enviar
           </Button>
           <Button variant="ghost" onClick={onClose}>Cancelar</Button>

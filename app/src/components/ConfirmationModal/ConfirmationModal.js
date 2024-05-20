@@ -21,7 +21,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
           Você deseja adicionar uma denúncia neste ponto do mapa?
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onConfirm}>
+          <Button colorScheme="red" mr={3} onClick={onConfirm}>
             Confirmar
           </Button>
           <Button variant="ghost" onClick={onClose}>Cancelar</Button>
