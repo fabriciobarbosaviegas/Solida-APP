@@ -8,13 +8,16 @@ import {
   VStack,
   Text,
   useToast,
+  Select,
 } from '@chakra-ui/react';
 
 const AuthForm = ({ onLogin, onSignup }) => {
   const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [type, setType] = useState('');
   const toast = useToast();
 
   const handleSubmit = () => {
@@ -38,6 +41,12 @@ const AuthForm = ({ onLogin, onSignup }) => {
   return (
     <Box maxW="sm" mx="auto" mt={10} p={5} borderWidth={1} borderRadius="lg">
       <VStack spacing={4}>
+        {!isLogin && (
+          <FormControl id="nome" isRequired>
+            <FormLabel>Nome Completo</FormLabel>
+            <Input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          </FormControl>
+        )}
         <FormControl id="email" isRequired>
           <FormLabel>Email</FormLabel>
           <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -50,6 +59,15 @@ const AuthForm = ({ onLogin, onSignup }) => {
           <FormControl id="confirmPassword" isRequired>
             <FormLabel>Confirmar Senha</FormLabel>
             <Input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          </FormControl>
+        )}
+        {!isLogin && (
+          <FormControl id="confirmPassword" isRequired>
+            <FormLabel>Tipo:</FormLabel>
+            <Select placeholder="Selecione o tipo" value={type} onChange={(e) => setType(e.target.value)}>
+              <option value="0">Morador</option>
+              <option value="1">Força de Segurança</option>
+            </Select>
           </FormControl>
         )}
         <Button colorScheme="red" onClick={handleSubmit}>
