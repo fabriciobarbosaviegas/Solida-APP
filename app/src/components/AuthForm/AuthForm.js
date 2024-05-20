@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Login } from '../../services/apiauth';
+
 import {
   Box,
   Button,
@@ -20,8 +22,11 @@ const AuthForm = ({ onLogin, onSignup }) => {
   const [type, setType] = useState('');
   const toast = useToast();
 
-  const handleSubmit = () => {
-    if (isLogin) {
+  console.log("chico moedas");
+  const handleSubmit = async () => {
+    const penis = await Login('amyuhsn@gmail.com', 'pelahorda')
+    console.log(penis)
+   /* if (isLogin) {
       onLogin({ email, password });
     } else {
       if (password !== confirmPassword) {
@@ -35,7 +40,7 @@ const AuthForm = ({ onLogin, onSignup }) => {
         return;
       }
       onSignup({ email, password });
-    }
+    }*/
   };
 
   return (
