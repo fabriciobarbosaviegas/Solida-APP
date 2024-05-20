@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasMany, manyToMany } from '@adonisjs/lucid/orm'
 import User from './user.js'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
+import Volunteer from './volunteer.js'
 
 export default class Report extends BaseModel {
   @column({ isPrimary: true })
@@ -39,4 +40,17 @@ export default class Report extends BaseModel {
     foreignKey: 'userId',
   }) 
   declare creator: BelongsTo<typeof User>
+
+  @hasMany(()=>Volunteer)
+  declare volunteer : HasMany<typeof Volunteer>
+
+  @manyToMany(() => User, {
+    localKey: 'id',
+    pivotForeignKey: 'report_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'user_id',
+    pivotTable: 'volunteers'
+  })
+  declare volunteers: ManyToMany<typeof User>
+
 }

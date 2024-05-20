@@ -7,6 +7,7 @@ export default class ReportsController {
         try {
             const report = await Report.find(params.id);
             await report?.load('creator');
+            await report?.load('volunteers');
             return report;
 
         } catch(Error: any) {

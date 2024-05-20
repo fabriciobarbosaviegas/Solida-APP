@@ -3,11 +3,11 @@ import User from '../models/user.js';
 
 export default class UsersController {
     async getUserById({params}: HttpContext) {
-        try {
-            return User.find(params.id);
-        } catch(Error: any) {
-            return Error;
-        }
+            const user = await User.find(params.id);
+            await user?.load('createdReports');
+            await user?.load('volunteering');
+            return user;
+
     }
     async createUser({request}: HttpContext) {
         try {
