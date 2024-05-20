@@ -5,8 +5,8 @@ export default class UsersController {
     async getUserById({params}: HttpContext) {
         try {
             return User.find(params.id);
-        } catch(Error) {
-            return "Error";
+        } catch(Error: any) {
+            return Error;
         }
     }
     async createUser({request}: HttpContext) {
@@ -18,15 +18,14 @@ export default class UsersController {
                 type:request.body().type,
             });
             return "User created";
-        } catch(Error) {
-            return 'Error';
+        } catch(Error: any) {
+            return Error;
         }
     }
 
     async updateUser({request, params}: HttpContext) {
         try {
             const user = await User.findOrFail(params.id);
-            console.log(user.fullName);
             user.fullName = request.body().fullName;
             user.password = request.body().password;
             user.email = request.body().email;
@@ -35,8 +34,8 @@ export default class UsersController {
             await user.save();
             
             return "User updated";
-        } catch(Error) {
-            return 'Error';
+        } catch(Error: any) {
+            return Error;
         }
     }
 
@@ -44,9 +43,9 @@ export default class UsersController {
         try {
             const user = await User.find(params.id);
             user?.delete();
-            return "User delete";
-        } catch(Error) {
-            return "Error";
+            return "User deleted";
+        } catch(Error: any) {
+            return Error;
         }
     }
 

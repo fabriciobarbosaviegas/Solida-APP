@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import UsersController from '../app/controllers/users_controller.js'
+import ReportsController from '../app/controllers/reports_controller.js'
 
 router.get('/', async () => {
   return {
@@ -22,3 +23,11 @@ router.group(() => {
   router.put('/:id', [UsersController, 'updateUser'])
   router.delete('/:id', [UsersController, 'deleteUser'])
 }).prefix("user")
+
+router.group(() => {
+  router.get('/', [ReportsController, 'getAllReports'])
+  router.get('/:id', [ReportsController, 'getReportById'])
+  router.post('/', [ReportsController, 'createReport'])
+  router.put('/:id', [ReportsController, 'updateReport'])
+  router.delete('/:id', [ReportsController, 'deleteReport'])
+}).prefix("report")
