@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { Box, Flex } from '@chakra-ui/react';
 import Search from '../Search/Search'; 
@@ -21,6 +21,8 @@ const Map = () => {
   const [zoom, setZoom] = useState(10);
   const [markers, setMarkers] = useState([]);
   const [autocomplete, setAutocomplete] = useState(null);
+  const autocompleteRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -59,16 +61,25 @@ const Map = () => {
       setZoom(16);
     }
   };
+  
+  const handleButtonClick = () => {
+    if (autocompleteRef.current && inputRef.current) {
+      const places = autocompleteRef.current.getPlace();
+      if (places.length > 0) {
+        handlePlaceSelect();
+      }
+    }
+  };
 
   const handleMarkerClick = (id) => {
     setMarkers((current) => current.filter((marker) => marker.id !== id));
   };
 
   return (
-    <LoadScript googleMapsApiKey="" libraries={libraries}>
+    <LoadScript googleMapsApiKey="AIzaSyDBDvgCL7OHPKHU6_-KZlLljBoa1Gfdtuk" libraries={libraries}>
        <Flex justify="flex-end">
         <Box position="absolute" top="10px" right="10px" zIndex="1">
-          <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} size="sm" />
+          <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} handleButtonClick={handleButtonClick} size="sm" />
         </Box>
       </Flex>
       <GoogleMap
