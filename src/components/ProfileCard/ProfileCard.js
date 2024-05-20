@@ -1,8 +1,7 @@
 // ProfileCard.js
 import React from 'react';
-import { Icon, Box, Button, VStack, Heading, Stack, Image } from '@chakra-ui/react';
-import { SettingsIcon, EditIcon, RepeatClockIcon, InfoOutlineIcon, WarningTwoIcon, createIcon  } from '@chakra-ui/icons'
-import WarningIcon from '../../assets/DenunciaIcon.svg'
+import { Box, Button, VStack, Heading, Stack, Image } from '@chakra-ui/react';
+import { SettingsIcon, EditIcon, RepeatClockIcon, InfoOutlineIcon, WarningTwoIcon  } from '@chakra-ui/icons'
 
 const ProfileCard = ({ title, text }) => {
   return (
