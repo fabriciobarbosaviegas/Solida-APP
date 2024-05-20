@@ -22,6 +22,6 @@ export default class AuthController {
 
         } catch(Error: any) {
             return Error;
-        }5
+        }
     }
 }

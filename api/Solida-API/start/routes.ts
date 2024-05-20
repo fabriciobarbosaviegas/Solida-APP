@@ -24,6 +24,8 @@ router.post('login/', [AuthController, 'login'])
 router.post('user/', [UsersController, 'createUser'])
 router.group(() => {
   router.get('/:id', [UsersController, 'getUserById'])
+  router.get('/photo/:id', [UsersController, 'getPhotoByUserId'])
+  router.put('/photo/:id', [UsersController, 'updateUserPhoto'])
   router.put('/:id', [UsersController, 'updateUser'])
   router.delete('/:id', [UsersController, 'deleteUser'])
 }).prefix("user").use(middleware.auth({
@@ -45,6 +47,8 @@ router.group(() => {
   router.post('/', [ReportsController, 'createReport'])
   router.put('/:id', [ReportsController, 'updateReport'])
   router.delete('/:id', [ReportsController, 'deleteReport'])
+  router.get('/photo/:id', [ReportsController, 'getPhotoByReportId'])
+  router.put('/photo/:id', [ReportsController, 'updateReportPhoto'])
 }).prefix("report")
 .use(middleware.auth({
   guards: ['api']
