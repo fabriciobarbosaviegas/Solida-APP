@@ -1,5 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '../models/user.js';
+import app from '@adonisjs/core/services/app'
+import { normalize, sep } from 'node:path';
 
 export default class UsersController {
     async getUserById({params}: HttpContext) {
@@ -13,6 +15,7 @@ export default class UsersController {
         }
 
     }
+
     async createUser({request}: HttpContext) {
         try {
             const user = await User.findBy({
@@ -44,6 +47,49 @@ export default class UsersController {
             await user.save();
             
             return "User updated";
+        } catch(Error: any) {
+            return Error;
+        }
+    }
+
+    async getPhotoByUserId({params, response}: HttpContext) {
+        try {
+            const user = await User.find(params.id);
+            if(!user) {
+                return "User not found";
+            }
+
+            const filePath = [user.photo].join(sep)
+            const normalizedPath = normalize(filePath)          
+            const absolutePath = app.makePath('uploads', normalizedPath);
+
+            return response.download(absolutePath);
+        } catch (Error: any) {
+            return Error;
+        }
+
+    }
+
+    async updateUserPhoto({request, params}: HttpContext) {
+        try {
+
+            const avatar = request.file('avatar', {
+                size: '2mb',
+                extnames: ['jpg', 'png', 'jpeg', 'webp']
+            });
+              
+            await avatar?.move(app.makePath('uploads'));
+            
+            if(!avatar?.fileName) {
+                return "Error";
+            }
+              
+            const user = await User.findOrFail(params.id);
+            user.photo = avatar?.fileName;
+
+            await user.save();
+            
+            return user.photo;
         } catch(Error: any) {
             return Error;
         }
