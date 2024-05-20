@@ -56,7 +56,7 @@ const Sidebar = () => {
           <DrawerOverlay>
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader>Netto precisa de ajuda</DrawerHeader>
+              <DrawerHeader>Denuncias</DrawerHeader>
               <DrawerBody>
                 <WarningCard title="Netto precisa de ajuda" ImgSrc={Geleira} text="Ola amiguinhos. Gelo Gelo Gelo Gelo Gelo, Geleira Geleira Geleira. Escalada Escalada Escalada Escalada Escalada Escalala. " />
               </DrawerBody>
