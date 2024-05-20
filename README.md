@@ -16,7 +16,7 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
     - [X] Implementação da API
 - [ ] Criação da página inicial
     - [X] Mapa
-    - [ ] Barra de Pesquisa
+    - [X] Barra de Pesquisa
     - [X] Menu Lateral
     - [ ] Menu de Ajuda (mobile)
         - [ ] Menu aberto (mobile)
