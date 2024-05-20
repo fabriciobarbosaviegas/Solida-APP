@@ -3,14 +3,24 @@ import User from '../models/user.js';
 
 export default class UsersController {
     async getUserById({params}: HttpContext) {
+        try {
             const user = await User.find(params.id);
             await user?.load('createdReports');
             await user?.load('volunteering');
             return user;
+        } catch (Error: any) {
+            return Error;
+        }
 
     }
     async createUser({request}: HttpContext) {
         try {
+            const user = await User.findBy({
+                email: request.body().email
+            })
+            if(user) {
+                return "Email already registred"
+            }
             User.create({
                 fullName:request.body().fullName,
                 password:request.body().password,
