@@ -1,8 +1,6 @@
-// ProfileCard.js
 import React from 'react';
-import { Icon, Box, Button, VStack, Heading, Stack, Image } from '@chakra-ui/react';
-import { SettingsIcon, EditIcon, RepeatClockIcon, InfoOutlineIcon, WarningTwoIcon, createIcon  } from '@chakra-ui/icons'
-import WarningIcon from '../../assets/DenunciaIcon.svg'
+import { Box, Button, VStack, Heading, Stack, Image } from '@chakra-ui/react';
+import { SettingsIcon, EditIcon, RepeatClockIcon, InfoOutlineIcon, WarningTwoIcon  } from '@chakra-ui/icons'
 
 const ProfileCard = ({ title, text }) => {
   return (
@@ -27,16 +25,16 @@ const ProfileCard = ({ title, text }) => {
         </Stack>
 
         <VStack spacing={4} align="stretch" mt="5">
-          <Button rightIcon={<WarningTwoIcon />} colorScheme='red' variant='outline'>
+          <Button rightIcon={<WarningTwoIcon />} colorScheme='red' variant='outline' justifyContent="space-between">
             Minhas Denúncias
           </Button>
-          <Button rightIcon={<RepeatClockIcon />} colorScheme='red' variant='outline'>
+          <Button rightIcon={<RepeatClockIcon />} colorScheme='red' variant='outline' justifyContent="space-between">
             Histórico
           </Button>
-          <Button rightIcon={<SettingsIcon />} colorScheme='red' variant='outline'>
+          <Button rightIcon={<SettingsIcon />} colorScheme='red' variant='outline' justifyContent="space-between">
             Configurações
           </Button>
-          <Button rightIcon={<InfoOutlineIcon />} colorScheme='red' variant='outline'>
+          <Button rightIcon={<InfoOutlineIcon />} colorScheme='red' variant='outline' justifyContent="space-between">
             Sobre
           </Button>
           <Button colorScheme='red'>
