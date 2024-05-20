@@ -29,4 +29,5 @@ export default class Volunteer extends BaseModel {
     foreignKey: 'reportId',
   }) 
   declare report: BelongsTo<typeof Report>
+  
 }

@@ -53,5 +53,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   })
   declare volunteering: ManyToMany<typeof Report>
 
-  static accessTokens = DbAccessTokensProvider.forModel(User)
+  static accessTokens = DbAccessTokensProvider.forModel(User, {
+    expiresIn: "2 days",
+  })
 }
