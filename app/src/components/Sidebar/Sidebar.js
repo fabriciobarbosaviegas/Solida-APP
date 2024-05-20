@@ -48,6 +48,7 @@ const Sidebar = () => {
       >
         <Icon ImgSrc={MapIcon} text={"Mapa"} width={iconWidth} height={iconHeight} />
         <Icon ImgSrc={WarningIcon} text={"Denuncias"} width={iconWidth} height={iconHeight} onClick={onWarningOpen} />
+        <Box borderBottom="2px solid lightgray"/>
         <Spacer display={displaySpacer} />
         <Icon ImgSrc={UserIcon} text={"Você"} width={iconWidth} height={iconHeight} onClick={onProfileOpen} />
       </SidebarBox>
