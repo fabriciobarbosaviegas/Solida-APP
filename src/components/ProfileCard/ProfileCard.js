@@ -19,15 +19,6 @@ const ProfileCard = ({ title, text }) => {
           <Button rightIcon={<WarningTwoIcon />} colorScheme='red' variant='outline' justifyContent="space-between">
             Minhas Denúncias
           </Button>
-          <Button rightIcon={<RepeatClockIcon />} colorScheme='red' variant='outline' justifyContent="space-between">
-            Histórico
-          </Button>
-          <Button rightIcon={<SettingsIcon />} colorScheme='red' variant='outline' justifyContent="space-between">
-            Configurações
-          </Button>
-          <Button rightIcon={<InfoOutlineIcon />} colorScheme='red' variant='outline' justifyContent="space-between">
-            Sobre
-          </Button>
           <Button colorScheme='red'>
             Sair da conta
           </Button>

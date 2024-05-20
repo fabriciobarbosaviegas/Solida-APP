@@ -54,10 +54,16 @@ const Map = () => {
   const handlePlaceSelect = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
-      setCenter({
+      const newMarker = {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
+        id: new Date().getTime()
+      };
+      setCenter({
+        lat: newMarker.lat,
+        lng: newMarker.lng,
       });
+      setMarkers((current) => [...current, newMarker]);
       setZoom(16);
     }
   };
@@ -67,6 +73,7 @@ const Map = () => {
       const places = autocompleteRef.current.getPlace();
       if (places.length > 0) {
         handlePlaceSelect();
+        setZoom(16);
       }
     }
   };
@@ -76,7 +83,7 @@ const Map = () => {
   };
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyDBDvgCL7OHPKHU6_-KZlLljBoa1Gfdtuk" libraries={libraries}>
+    <LoadScript googleMapsApiKey="" libraries={libraries}>
        <Flex justify="flex-end">
         <Box position="absolute" top="10px" right="10px" zIndex="1">
           <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} handleButtonClick={handleButtonClick} size="sm" />
