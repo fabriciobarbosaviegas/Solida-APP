@@ -71,7 +71,7 @@ const Sidebar = () => {
               <DrawerCloseButton />
               <DrawerHeader>Profile</DrawerHeader>
               <DrawerBody>
-                <ProfileCard title="User Profile" text="Here is some information about the user." image="https://institucional.ufpel.edu.br/cache/imagens/23291_API_INSTITUCIONAL_.jpg" />
+                <ProfileCard title="Guilherme Netto" text="Morador" image="https://institucional.ufpel.edu.br/cache/imagens/23291_API_INSTITUCIONAL_.jpg" />
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>
