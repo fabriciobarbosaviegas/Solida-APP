@@ -5,6 +5,7 @@ import Search from '../Search/Search';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import PinDenuncia from '../../assets/PinDenuncia.svg';
 import ReportForm from '../ReportForm/ReportForm';
+import UserLocationPin from '../../assets/UserLocationPin.svg';
 
 const mapContainerStyle = {
   width: '100%',
@@ -33,7 +34,7 @@ const Map = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setCenter({ lat: latitude, lng: longitude });
-          setMarkers([{ lat: latitude, lng: longitude }]);
+          setMarkers([{ lat: latitude, lng: longitude, isUserLocation: true }]);
           setZoom(16);
         },
         () => {
@@ -101,9 +102,7 @@ const Map = () => {
           <Marker
             key={marker.id}
             position={{ lat: marker.lat, lng: marker.lng }}
-            icon={{
-              url: PinDenuncia,
-            }}
+            icon={marker.isUserLocation ? UserLocationPin : PinDenuncia}
             onClick={() => handleMarkerClick(marker.id)}
           />
         ))}
