@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, VStack, Stack} from '@chakra-ui/react';
-import { SettingsIcon, EditIcon, RepeatClockIcon, InfoOutlineIcon, WarningTwoIcon } from '@chakra-ui/icons'
+import { EditIcon, WarningTwoIcon } from '@chakra-ui/icons'
 import UserIcon from '../UserIcon/UserIcon';
 
 const ProfileCard = ({ title, text }) => {
