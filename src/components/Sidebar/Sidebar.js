@@ -45,9 +45,15 @@ const Sidebar = () => {
         alignItems={align}
         justifyContent={'space-between'}
         align={align}
-      >
+      > 
         <Icon ImgSrc={MapIcon} text={"Mapa"} width={iconWidth} height={iconHeight} />
-        <Icon ImgSrc={WarningIcon} text={"Denuncias"} width={iconWidth} height={iconHeight} onClick={onWarningOpen} />
+        <Box
+        border-color="gray"
+        border-style="solid"
+        borderWidth="0px 0px 2px 0px"
+        >
+        <Icon ImgSrc={WarningIcon} text={"Denuncias"} width={iconWidth} height={iconHeight} onClick={onWarningOpen} borderWidth={1} />
+        </Box>
         <Spacer display={displaySpacer} />
         <Icon ImgSrc={UserIcon} text={"Você"} width={iconWidth} height={iconHeight} onClick={onProfileOpen} />
       </SidebarBox>
