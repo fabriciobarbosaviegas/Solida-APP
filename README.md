@@ -59,3 +59,5 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
 
 ## Comentários sobre o processo de desenvolvimento
 Devido a motivos de força maior encontrados durante o desenvolvimento, não foi possível fazer o deploy do backend, bem como algumas conexões entre o back e o front. Ainda sendo possivel analisar a aplicação em sua quase totalidade ao executar localmente. No entanto acreditamos na ideia apresentada e após o período da competição, se for possível, e se nossos recursos assim permitirem, adorariamos continuar o trabalho.
+
+![The end of Solida](https://github.com/fabriciobarbosaviegas/Solida-APP/blob/main/theEnd.jpg?raw=true)
