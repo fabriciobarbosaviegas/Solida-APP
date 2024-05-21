@@ -12,6 +12,7 @@ import {
   useToast,
   Select,
 } from '@chakra-ui/react';
+import { Create } from '../../services/report/report';
 
 const AuthForm = ({ onLogin, onSignup }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -36,6 +37,10 @@ const AuthForm = ({ onLogin, onSignup }) => {
       console.log(response);
       localStorage.setItem("token", response.value);
       localStorage.setItem("id", response.userId);
+     // console.log(localStorage.getItem("token"));
+     // console.log(localStorage.getItem("id"));
+      //const tmp = await Create(localStorage.getItem("id"), "i", "i", "i", "i", "i", "i");
+      //console.log(tmp);
     }
     if (isLogin) {
       onLogin({ email, password });
