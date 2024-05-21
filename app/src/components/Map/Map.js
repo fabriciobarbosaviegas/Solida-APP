@@ -87,7 +87,7 @@ const Map = () => {
 
 
   return (
-    <LoadScript googleMapsApiKey="" libraries={libraries}>
+    <LoadScript googleMapsApiKey={process.env.apiKey} libraries={libraries}>
       <Flex justify="flex-end">
         <Box position="absolute" top="10px" right="10px" zIndex="1">
           <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} size="sm" />
