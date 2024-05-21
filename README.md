@@ -36,7 +36,7 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
     - [ ] Voluntariar
     - [ ] Mais informações
     - [ ] Ver no mapa
-- [] Perfil
+- [ ] Perfil
     - [X] Mostrar usuário
         - [X] Foto
         - [X] Nome
@@ -56,8 +56,3 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
 [![React](https://img.shields.io/badge/-React-000?&logo=React&logoColor=blue)](#)
 [![Adonis](https://img.shields.io/badge/adonisjs-000?logo=adonisjs&logoColor=blue)](#)
 [![Postgresql](https://img.shields.io/badge/postgresql-000?logo=postgresql&logoColor=blue)](#)
-
-## Comentários sobre o processo de desenvolvimento
-Devido a motivos de força maior encontrados durante o desenvolvimento, não foi possível fazer o deploy do backend, bem como algumas conexões entre o back e o front. Ainda sendo possivel analisar a aplicação em sua quase totalidade ao executar localmente. No entanto acreditamos na ideia apresentada e após o período da competição, se for possível, e se nossos recursos assim permitirem, adorariamos continuar o trabalho.
-
-![The end of Solida](https://github.com/fabriciobarbosaviegas/Solida-APP/blob/main/theEnd.jpg?raw=true)
