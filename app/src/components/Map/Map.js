@@ -34,7 +34,7 @@ const Map = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setCenter({ lat: latitude, lng: longitude });
-          setMarkers([{ lat: latitude, lng: longitude, isUserLocation: true }]);
+          setMarkers([{ lat: latitude, lng: longitude, isUserLocation: true, id: 'user-location' }]);
           setZoom(16);
         },
         () => {
@@ -72,7 +72,9 @@ const Map = () => {
   };
 
   const handleMarkerClick = (id) => {
-    setMarkers((current) => current.filter((marker) => marker.id !== id));
+    if(id !== 'user-location'){
+      setMarkers((current) => current.filter((marker) => marker.id !== id));
+    }
   };
 
   const handleFormSubmit = (report) => {
