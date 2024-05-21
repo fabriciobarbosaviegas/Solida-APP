@@ -13,13 +13,11 @@ const App = () => {
  
    const handleLogin = (credentials) => {
      // Lógica para autenticação
-     console.log('Login:', credentials);
      setIsAuthenticated(true);
    };
  
    const handleSignup = (credentials) => {
      // Lógica para cadastro
-     console.log('Signup:', credentials);
      setIsAuthenticated(true);
    };
  

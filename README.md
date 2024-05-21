@@ -29,25 +29,25 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
         - [ ] Total de voluntários nessa ação
         - [ ] Voluntariar
 - [ ] Criação do menu denúncias
-    - [-] Listar denúncias na região
+    - [ ] Listar denúncias na região
     - [ ] Pesquisar denúncias por região
     - [X] Fazer denúncia
         - [X] Formulário de denúncia
     - [ ] Voluntariar
     - [ ] Mais informações
     - [ ] Ver no mapa
-- [ ] Perfil
-    - [-] Mostrar usuário
-        - [-] Foto
-        - [-] Nome
-        - [-] Tipo de Usuário
-        - [-] Editar informações do usuário
+- [] Perfil
+    - [X] Mostrar usuário
+        - [X] Foto
+        - [X] Nome
+        - [X] Tipo de Usuário
+        - [X] Editar informações do usuário
     - [ ] Minhas denúncias
         - [ ] Listar denúncias do usuário
             - [ ] Ver denúncia
             - [ ] Marcar como resolvido
             - [ ] Editar denúncia
-    - [-] Sair da conta
+    - [ ] Sair da conta
 
 ## Tecnologias utilizadas
 [![HTML](https://img.shields.io/badge/-HTML-000?&logo=html5&logoColor=orange)](#)
