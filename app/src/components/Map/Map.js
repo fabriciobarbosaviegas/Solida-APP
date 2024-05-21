@@ -5,7 +5,6 @@ import Search from '../Search/Search';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import PinDenuncia from '../../assets/PinDenuncia.svg';
 import ReportForm from '../ReportForm/ReportForm';
-import { Login } from '../../services/apiauth';
 
 const mapContainerStyle = {
   width: '100%',

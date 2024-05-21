@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Login } from '../../services/apiauth';
+import { Login } from '../../services/auth/apiauth';
 
 import {
   Box,
@@ -22,11 +22,22 @@ const AuthForm = ({ onLogin, onSignup }) => {
   const [type, setType] = useState('');
   const toast = useToast();
 
-  console.log("chico moedas");
   const handleSubmit = async () => {
-    const penis = await Login('amyuhsn@gmail.com', 'pelahorda')
-    console.log(penis)
-   /* if (isLogin) {
+    const response = await Login( email, password);
+    if(!response) {
+      toast({
+        title: "Erro",
+        description: "Login falhou meio cringe",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } else {
+      console.log(response);
+      localStorage.setItem("token", response.value);
+      localStorage.setItem("id", response.userId);
+    }
+    if (isLogin) {
       onLogin({ email, password });
     } else {
       if (password !== confirmPassword) {
@@ -40,7 +51,7 @@ const AuthForm = ({ onLogin, onSignup }) => {
         return;
       }
       onSignup({ email, password });
-    }*/
+    }
   };
 
   return (
