@@ -105,7 +105,7 @@ const Map = () => {
             key={marker.id}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={marker.isUserLocation ? UserLocationPin : PinDenuncia}
-            onClick={() => handleMarkerClick(marker.id)}
+            onClick={marker.id !== 'user-location' ? () => handleMarkerClick(marker.id) : handleMapClick}
           />
         ))}
       </GoogleMap>
