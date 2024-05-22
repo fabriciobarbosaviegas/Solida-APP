@@ -10,8 +10,10 @@ import {
   useToast,
   Select,
 } from '@chakra-ui/react';
+import { login, signIn } from '../../services/AuthService';
+import { useAuth } from '../../contexts/AuthContext';
 
-const AuthForm = ({ onLogin, onSignup }) => {
+const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,10 +21,32 @@ const AuthForm = ({ onLogin, onSignup }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [type, setType] = useState('');
   const toast = useToast();
+  const { login: authLogin } = useAuth();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isLogin) {
-      onLogin({ email, password });
+      try {
+        const response = await login(email, password);
+        if (response && response.value) {
+          authLogin(response.value); 
+        } else {
+          toast({
+            title: "Erro",
+            description: "Credenciais inválidas",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      } catch (error) {
+        toast({
+          title: "Erro",
+          description: error.message || "Credenciais inválidas",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     } else {
       if (password !== confirmPassword) {
         toast({
@@ -34,7 +58,10 @@ const AuthForm = ({ onLogin, onSignup }) => {
         });
         return;
       }
-      onSignup({ email, password });
+      const response = await signIn(name,email, password, type);
+        if (response) {
+          setIsLogin(true);
+        }
     }
   };
 
@@ -62,7 +89,7 @@ const AuthForm = ({ onLogin, onSignup }) => {
           </FormControl>
         )}
         {!isLogin && (
-          <FormControl id="confirmPassword" isRequired>
+          <FormControl id="type" isRequired>
             <FormLabel>Tipo:</FormLabel>
             <Select placeholder="Selecione o tipo" value={type} onChange={(e) => setType(e.target.value)}>
               <option value="0">Morador</option>
