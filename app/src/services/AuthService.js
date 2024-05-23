@@ -91,3 +91,17 @@ export const getPhotoByUserId = async (id) => {
     throw error.response ? error.response.data : new Error('Network error');
   }
 };
+
+export const deleteUser = async (id) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.delete(`${API_URL}/user/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Network error');
+  }
+};

@@ -16,6 +16,7 @@ const Search = ({ onLoad, onPlaceChanged, handleButtonClick, size }) => {
           borderRadius="2xl"
           bg="white"
           ref={inputRef}
+          boxShadow="base"
         />
         <InputRightAddon p={0} border="none" borderRadius="2xl">
           <Button

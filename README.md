@@ -41,13 +41,13 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
         - [X] Foto
         - [X] Nome
         - [X] Tipo de Usuário
-        - [X] Editar informações do usuário
     - [ ] Minhas denúncias
         - [ ] Listar denúncias do usuário
             - [ ] Ver denúncia
             - [ ] Marcar como resolvido
             - [ ] Editar denúncia
-    - [ ] Sair da conta
+    - [ ] Deletar conta
+    - [X] Sair da conta
 
 ## Tecnologias utilizadas
 [![HTML](https://img.shields.io/badge/-HTML-000?&logo=html5&logoColor=orange)](#)
