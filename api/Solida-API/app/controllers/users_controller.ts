@@ -24,12 +24,27 @@ export default class UsersController {
             if(user) {
                 return "Email already registred"
             }
-            User.create({
-                fullName:request.body().fullName,
-                password:request.body().password,
-                email: request.body().email,
-                type:request.body().type,
+
+            // Handle file upload
+            const avatar = request.file('avatar', {
+                size: '2mb',
+                extnames: ['jpg', 'png', 'jpeg', 'webp']
             });
+
+            await avatar?.move(app.makePath('uploads'));
+
+            if (!avatar?.fileName) {
+                return "Error uploading image";
+            }
+
+            await User.create({
+                fullName: request.body().fullName,
+                password: request.body().password,
+                email: request.body().email,
+                type: request.body().type,
+                photo: avatar?.fileName // Store the filename in the database
+            });
+
             return "User created";
         } catch(Error: any) {
             return Error;
@@ -67,7 +82,6 @@ export default class UsersController {
         } catch (Error: any) {
             return Error;
         }
-
     }
 
     async updateUserPhoto({request, params}: HttpContext) {

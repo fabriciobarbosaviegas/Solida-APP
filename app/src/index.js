@@ -7,7 +7,8 @@ import AuthForm from './components/AuthForm/AuthForm';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 const App = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
+  
 
   return (
     <ChakraProvider>

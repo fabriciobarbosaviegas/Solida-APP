@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Spacer, useBreakpointValue, Flex, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure } from '@chakra-ui/react';
+import { Box, Spacer, useBreakpointValue, Flex, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Center } from '@chakra-ui/react';
 import WarningCard from '../WarningCard/WarningCard';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import WarningIcon from '../../assets/DenunciaIcon.svg'
@@ -57,7 +57,9 @@ const Sidebar = () => {
           <DrawerOverlay>
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader>Denuncias</DrawerHeader>
+              <DrawerHeader boxShadow="base">
+                <Center>Denuncias</Center>
+              </DrawerHeader>
               <DrawerBody>
                 <WarningCard title="Netto precisa de ajuda" ImgSrc={Geleira} text="Ola amiguinhos. Gelo Gelo Gelo Gelo Gelo, Geleira Geleira Geleira. Escalada Escalada Escalada Escalada Escalada Escalala. " />
               </DrawerBody>
@@ -69,8 +71,12 @@ const Sidebar = () => {
         <Drawer placement="left" onClose={onProfileClose} isOpen={isProfileOpen} size={drawerSize}>
           <DrawerOverlay>
             <DrawerContent>
-              <DrawerCloseButton />
-              <DrawerHeader>Profile</DrawerHeader>
+              <Center boxShadow="base">
+                <DrawerCloseButton />
+                <DrawerHeader>
+                  Você
+                </DrawerHeader>
+              </Center>
               <DrawerBody>
                 <ProfileCard title="Guilherme Netto" text="Morador" image="https://institucional.ufpel.edu.br/cache/imagens/23291_API_INSTITUCIONAL_.jpg" />
               </DrawerBody>

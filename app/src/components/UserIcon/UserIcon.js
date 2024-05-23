@@ -2,15 +2,15 @@ import React from 'react';
 import { Image, Box, Heading, Stack } from '@chakra-ui/react';
 
 
-const UserIcon = ({ imageUrl, title, text, imageSize, titleSize }) => {
+const UserIcon = ({ src, title, text, imageSize, titleSize }) => {
   return (
     <Stack direction={'row'} alignItems="center" spacing={6} justifyContent="center">
       <Image
         borderRadius='full'
         boxSize={imageSize}
         objectFit="cover"
-        src={imageUrl}
-        alt='Netto'
+        src={src}
+        alt={title}
       />
       <Box d="flex" alignItems="baseline" justifyContent="center">
         <Heading size={titleSize}>{title}</Heading>
