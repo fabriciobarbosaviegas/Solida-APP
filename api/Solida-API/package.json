@@ -5,8 +5,8 @@
   "type": "module",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "node bin/server.js",
-    "build": "node ace build",
+    "start": "cd ./build && node bin/server.js",
+    "build": "node ace build && cp ./.env ./build/.env",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
     "lint": "eslint .",
