@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import User from '../models/user.js';
 import app from '@adonisjs/core/services/app'
 import { normalize, sep } from 'node:path';
+import fs from 'fs/promises';
 
 export default class UsersController {
     async getUserById({params}: HttpContext) {
@@ -112,11 +113,19 @@ export default class UsersController {
     async deleteUser({params}: HttpContext) {
         try {
             const user = await User.find(params.id);
-            user?.delete();
-            return "User deleted";
-        } catch(Error: any) {
-            return Error;
+            if (!user) {
+              return 'User not found';
+            }
+      
+            const filePath = app.makePath('uploads', normalize(user.photo));
+            await fs.unlink(filePath).catch((error) => {
+              console.error(`Error deleting user photo: ${error.message}`);
+            });
+      
+            await user.delete();
+            return 'User deleted';
+          } catch (error: any) {
+            return error;
+          }
         }
     }
-
-}
