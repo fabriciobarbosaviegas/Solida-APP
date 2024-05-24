@@ -24,22 +24,42 @@ export default class ReportsController {
             return Error;
         }
     }
-    async createReport({request}: HttpContext) {
+    async createReport({ request }: HttpContext) {
         try {
-            Report.create({ 
-                userId: request.body().userId,
-                category: request.body().category,
-                cords: request.body().cords,
-                title: request.body().title,
-                description: request.body().description,
-                imageUrl: request.body().imageUrl,
-                status: request.body().status
-            });
-            return "Report created";
-        } catch(Error: any) {
-            return Error;
+          const files = request.files('images', {
+            extnames: ['jpg', 'png', 'jpeg', 'webp'],
+            size: '2mb',
+          });
+    
+          let imageUrls: string[] = [];
+          if (files) {
+            for (let file of files) {
+              await file.move(app.makePath('uploads'), {
+                name: `${new Date().getTime()}-${file.clientName}`,
+                overwrite: true,
+              });
+    
+              if (file.fileName) {
+                imageUrls.push(file.fileName);
+              }
+            }
+          }
+    
+          await Report.create({
+            userId: request.input('userId'),
+            category: request.input('category'),
+            cords: request.input('cords'),
+            title: request.input('title'),
+            description: request.input('description'),
+            imageUrl: imageUrls.join(','),
+            status: request.input('status'),
+          });
+    
+          return "Report created";
+        } catch (Error: any) {
+          return Error;
         }
-    }
+      }
 
     async updateReport({request, params}: HttpContext) {
         try {
