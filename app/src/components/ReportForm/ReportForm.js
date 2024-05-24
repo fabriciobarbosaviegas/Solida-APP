@@ -14,6 +14,7 @@ import {
   Textarea,
   useToast,
 } from '@chakra-ui/react';
+import { createReport } from '../../services/ReportService';
 
 const ReportForm = ({ isOpen, onClose, onSubmit, initialLocation }) => {
   const [title, setTitle] = useState('');
@@ -21,6 +22,8 @@ const ReportForm = ({ isOpen, onClose, onSubmit, initialLocation }) => {
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
   const toast = useToast();
+  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     // Reseta os campos do formulário quando o modal é aberto
@@ -36,22 +39,42 @@ const ReportForm = ({ isOpen, onClose, onSubmit, initialLocation }) => {
     setImages(event.target.files);
   };
 
-  const handleSubmit = () => {
-    onSubmit({
-      location: initialLocation,
-      title,
-      type,
-      description,
-      images,
-    });
-    toast({
-      title: "Denúncia enviada.",
-      description: "Sua denúncia foi registrada com sucesso.",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
-    onClose();
+  const handleSubmit = async () => {
+    try {
+      const reportData = {
+        userId,
+        category: type,
+        cords: initialLocation,
+        title,
+        description,
+        imageUrl: images,
+        status: true,
+      };
+      const response = await createReport(reportData, token);
+      console.log('Server response:', response);
+
+      if (response !== 'Report created') {
+        throw new Error('Unexpected response from the server');
+      }
+
+      toast({
+        title: "Denúncia enviada.",
+        description: "Sua denúncia foi registrada com sucesso.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      onClose();
+    } catch (error) {
+      console.error('Error during creating report', error);
+      toast({
+        title: "Erro ao enviar denúncia.",
+        description: error.message || 'Ocorreu um erro desconhecido.',
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   if (!initialLocation) {
