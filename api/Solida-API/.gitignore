@@ -1,5 +1,4 @@
 # Dependencies and AdonisJS build
-node_modules
 build
 tmp
 
@@ -23,3 +22,6 @@ yarn-error.log
 
 # Platform specific
 .DS_Store
+.dockerignore
+DockerFile
+fly.toml
