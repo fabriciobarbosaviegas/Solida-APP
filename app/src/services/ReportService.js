@@ -29,3 +29,31 @@ export const createReport = async (reportData, token) => {
     throw error.response ? error.response.data : new Error('Network error');
   }
 };
+export const deleteReport = async (id) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.delete(`${API_URL}/report/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Network error');
+  }
+};
+
+export const getReports = async (token) => {
+  try {
+      const response = await axios.get(`${API_URL}/report`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+      });
+      console.log(response)
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching reports', error.response ? error.response.data : error);
+      throw error.response ? error.response.data : new Error('Network error');
+  }
+};

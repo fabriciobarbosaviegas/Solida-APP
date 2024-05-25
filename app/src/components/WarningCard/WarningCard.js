@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Text, Card, Divider, CardBody, CardFooter, Stack, Heading } from '@chakra-ui/react';
 import UserIcon from '../UserIcon/UserIcon';
 
-const WariningCard = ({ title, ImgSrc, text }) => {
+const WariningCard = ({ title, ImgSrc, text, userImg, fullName, type }) => {
   return (
     <Card maxW='sm'>
       <Box
@@ -20,7 +20,7 @@ const WariningCard = ({ title, ImgSrc, text }) => {
           </Text>
         </Stack>
         <Stack alignItems="flex-start" mt='6' spacing='3'>
-          <UserIcon imageUrl="https://institucional.ufpel.edu.br/cache/imagens/23291_API_INSTITUCIONAL_.jpg" title="Guilherme Netto" text="Morador" imageSize="50px" titleSize="sm" textSize="xs" />
+          <UserIcon imageUrl={userImg} title={fullName} text={type} imageSize="50px" titleSize="sm" textSize="xs" />
         </Stack>
       </CardBody>
       <Divider />

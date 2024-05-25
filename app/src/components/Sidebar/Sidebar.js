@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Spacer, useBreakpointValue, Flex, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Center } from '@chakra-ui/react';
 import WarningCard from '../WarningCard/WarningCard';
 import ProfileCard from '../ProfileCard/ProfileCard';
-import WarningIcon from '../../assets/DenunciaIcon.svg'
-import MapIcon from '../../assets/MapIcon.svg'
-import UserIcon from '../../assets/UserIcon.svg'
-import Icon from '../Icon/Icons'
-import Geleira from '../../assets/Geleira.png'
+import Icon from '../Icon/Icons';
+import WarningIcon from '../../assets/DenunciaIcon.svg';
+import MapIcon from '../../assets/MapIcon.svg';
+import UserIcon from '../../assets/UserIcon.svg';
+import Geleira from '../../assets/Geleira.png';
+import { getReports } from '../../services/ReportService'; 
+import {getUserById} from '../../services/AuthService';
 
 const SidebarBox = ({ children, ...props }) => (
   <Box
@@ -34,8 +36,49 @@ const Sidebar = () => {
   const drawerSize = useBreakpointValue({ base: "full", md: "md" });
   const iconWidth = useBreakpointValue({ base: "48px", md: "73px" });
   const iconHeight = useBreakpointValue({ base: "58px", md: "73px" });
+
   const { isOpen: isWarningOpen, onOpen: onWarningOpen, onClose: onWarningClose } = useDisclosure();
   const { isOpen: isProfileOpen, onOpen: onProfileOpen, onClose: onProfileClose } = useDisclosure();
+
+  const [reports, setReports] = useState([]);
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        const token = localStorage.getItem('token'); 
+        const reportsData = await getReports(token);
+        setReports(reportsData);
+
+        const usersData = await Promise.all(
+          reportsData.map(report => getUserById(report.userId))
+        );
+
+        const usersMap = usersData.reduce((acc, user) => {
+          acc[user.id] = user;
+          return acc;
+        }, {});
+
+        setUsers(usersMap);
+      } catch (error) {
+        console.error('Error fetching reports or users', error);
+      }
+    };
+
+    if (isWarningOpen) {
+      fetchReports();
+    }
+  }, [isWarningOpen]);
+  const getUserTypeText = (type) => {
+    switch (type) {
+      case 0:
+        return 'Morador';
+      case 1:
+        return 'Força de Segurança';
+      default:
+        return 'Tipo desconhecido';
+    }
+  };
 
   return (
     <Flex direction={{ base: "column-reverse", md: "row" }}>
@@ -61,7 +104,19 @@ const Sidebar = () => {
                 <Center>Denuncias</Center>
               </DrawerHeader>
               <DrawerBody>
-                <WarningCard title="Netto precisa de ajuda" ImgSrc={Geleira} text="Ola amiguinhos. Gelo Gelo Gelo Gelo Gelo, Geleira Geleira Geleira. Escalada Escalada Escalada Escalada Escalada Escalala. " />
+                {reports.map((report) => {
+                  const user = users[report.userId];
+                  return (
+                    <WarningCard
+                      title={report.title}
+                      ImgSrc={report.imgUrl || Geleira} //Nem Aqui
+                      text={report.description}
+                      userImg={user?.photo || UserIcon} //Não consegui fazer as imagens serem exibidas
+                      fullName={user?.fullName || 'Usuário desconhecido'}
+                      type={getUserTypeText(user?.type)}
+                    />
+                  );
+                })}
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>
@@ -78,7 +133,7 @@ const Sidebar = () => {
                 </DrawerHeader>
               </Center>
               <DrawerBody>
-                <ProfileCard title="Guilherme Netto" text="Morador" image="https://institucional.ufpel.edu.br/cache/imagens/23291_API_INSTITUCIONAL_.jpg" />
+                <ProfileCard/>
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>
