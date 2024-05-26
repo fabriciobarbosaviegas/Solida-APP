@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Box, Button, VStack, Stack, Center, Spinner, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay } from '@chakra-ui/react';import { WarningTwoIcon, DeleteIcon } from '@chakra-ui/icons';
+import { Box, Button, VStack, Stack, Center, Spinner, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay } from '@chakra-ui/react';
+import { WarningTwoIcon, DeleteIcon } from '@chakra-ui/icons';
 import UserIcon from '../UserIcon/UserIcon';
 import { useAuth } from '../../contexts/AuthContext';
 import { getPhotoByUserId, getUserById, deleteUser} from '../../services/AuthService';
