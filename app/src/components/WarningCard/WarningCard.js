@@ -3,7 +3,7 @@ import { Box, Image, Text, Card, Button, CardBody, CardFooter, Stack, Heading, C
 import { CheckIcon } from '@chakra-ui/icons';
 import Local from '../../assets/Local.svg';
 
-const WarningCard = ({ title, ImgSrc, text }) => {
+const WarningCard = ({ title, ImgSrc, text, myReports }) => {
   return (
     <Card mb={3}>
       <Box
@@ -24,12 +24,25 @@ const WarningCard = ({ title, ImgSrc, text }) => {
       </CardBody>
       <Center>
         <CardFooter>
-          <Button mr={3} colorScheme='red' variant='outline' justifyContent="space-between" leftIcon={<Image src={Local} />} >
-            Ver no Mapa
-          </Button>
-          <Button colorScheme='green' variant='outline' justifyContent="space-between" leftIcon={<CheckIcon />} >
-            Voluntariar
-          </Button>
+        {myReports ? (
+            <>
+              <Button mr={3} colorScheme='green' variant='outline' justifyContent="space-between" leftIcon={<CheckIcon />} >
+                Marcar como resolvido
+              </Button>
+              <Button colorScheme='red' variant='outline' justifyContent="space-between" leftIcon={<Image src={Local} />} >
+                Ver no Mapa
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button mr={3} colorScheme='green' variant='outline' justifyContent="space-between" leftIcon={<CheckIcon />} >
+                Voluntariar
+              </Button>
+              <Button colorScheme='red' variant='outline' justifyContent="space-between" leftIcon={<Image src={Local} />} >
+                Ver no Mapa
+              </Button>
+            </>
+          )}
         </CardFooter>
       </Center>
     </Card>

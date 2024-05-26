@@ -101,6 +101,7 @@ const Sidebar = () => {
                     title={report.title}
                     ImgSrc={report.imageUrl}
                     text={report.description}
+                    myReports={false}
                   />
                 ))}
               </DrawerBody>

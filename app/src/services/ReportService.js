@@ -76,3 +76,18 @@ export const getReportPhoto = async (reportId, token) => {
     throw error.response ? error.response.data : new Error('Network error');
   }
 };
+export const getUserReports = async (id) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.get(`${API_URL}/user/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    return response.data.createdReports;
+  
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Network error');
+  }
+};
