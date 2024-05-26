@@ -26,4 +26,3 @@ yarn-error.log
 .dockerignore
 DockerFile
 fly.toml
-docker-entrypoints.js
