@@ -40,6 +40,7 @@ export const deleteReport = async (id) => {
     });
     return response.data;
   } catch (error) {
+    console.error('Error deleting report:', error); 
     throw error.response ? error.response.data : new Error('Network error');
   }
 };

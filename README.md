@@ -27,13 +27,13 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
     - [ ] Clicar em uma denúncia
         - [ ] Abrir denúncia
         - [ ] Total de voluntários nessa ação
-        - [ ] Voluntariar
+        - [X] Voluntariar
 - [ ] Criação do menu denúncias
     - [ ] Listar denúncias na região
     - [ ] Pesquisar denúncias por região
     - [X] Fazer denúncia
         - [X] Formulário de denúncia
-    - [ ] Voluntariar
+    - [X] Voluntariar
     - [ ] Mais informações
     - [ ] Ver no mapa
 - [ ] Perfil
@@ -41,12 +41,11 @@ Solida APP visa criar uma rede de suporte robusta, promovendo a colaboração e 
         - [X] Foto
         - [X] Nome
         - [X] Tipo de Usuário
-    - [ ] Minhas denúncias
-        - [ ] Listar denúncias do usuário
-            - [ ] Ver denúncia
-            - [ ] Marcar como resolvido
-            - [ ] Editar denúncia
-    - [ ] Deletar conta
+    - [X] Minhas denúncias
+        - [X] Listar denúncias do usuário
+            - [X] Ver denúncia
+            - [X] Marcar como resolvido
+    - [X] Deletar conta
     - [X] Sair da conta
 
 ## Tecnologias utilizadas

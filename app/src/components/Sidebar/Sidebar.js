@@ -97,7 +97,7 @@ const Sidebar = () => {
               <DrawerBody>
                 {reports.map((report) => (
                   <WarningCard
-                    key={report.id}
+                    reportId={report.id}
                     title={report.title}
                     ImgSrc={report.imageUrl}
                     text={report.description}
