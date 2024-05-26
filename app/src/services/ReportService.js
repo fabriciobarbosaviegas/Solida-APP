@@ -29,6 +29,7 @@ export const createReport = async (reportData, token) => {
     throw error.response ? error.response.data : new Error('Network error');
   }
 };
+
 export const deleteReport = async (id) => {
   try {
     const token = localStorage.getItem('token');
@@ -50,10 +51,28 @@ export const getReports = async (token) => {
             'Authorization': `Bearer ${token}`
           }
       });
-      console.log(response)
       return response.data;
   } catch (error) {
       console.error('Error fetching reports', error.response ? error.response.data : error);
       throw error.response ? error.response.data : new Error('Network error');
+  }
+};
+
+export const getReportPhoto = async (reportId, token) => {
+  try {
+    const response = await axios.get(`${API_URL}/report/photo/${reportId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      responseType: 'blob',
+    });
+
+    console.log(response)
+    const imageUrl = URL.createObjectURL(response.data);
+    console.log(imageUrl)
+    return imageUrl;
+  } catch (error) {
+    console.error('Error fetching report photo', error.response ? error.response.data : error);
+    throw error.response ? error.response.data : new Error('Network error');
   }
 };

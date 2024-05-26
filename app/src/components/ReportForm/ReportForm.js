@@ -46,7 +46,7 @@ const ReportForm = ({ isOpen, onClose, initialLocation }) => {
   const handleImageChange = (event) => {
     const files = Array.from(event.target.files);
     const validImageTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    const maxImageCount = 4;
+    const maxImageCount = 1;
 
     let newImages = [];
     let newPreviews = [];

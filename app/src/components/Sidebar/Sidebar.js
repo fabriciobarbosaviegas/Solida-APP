@@ -7,8 +7,7 @@ import WarningIcon from '../../assets/DenunciaIcon.svg';
 import MapIcon from '../../assets/MapIcon.svg';
 import UserIcon from '../../assets/UserIcon.svg';
 import Geleira from '../../assets/Geleira.png';
-import { getReports } from '../../services/ReportService'; 
-import {getUserById} from '../../services/AuthService';
+import { getReports, getReportPhoto } from '../../services/ReportService';
 
 const SidebarBox = ({ children, ...props }) => (
   <Box
@@ -41,25 +40,27 @@ const Sidebar = () => {
   const { isOpen: isProfileOpen, onOpen: onProfileOpen, onClose: onProfileClose } = useDisclosure();
 
   const [reports, setReports] = useState([]);
-  const [users, setUsers] = useState({});
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const token = localStorage.getItem('token'); 
+        const token = localStorage.getItem('token');
         const reportsData = await getReports(token);
-        setReports(reportsData);
 
-        const usersData = await Promise.all(
-          reportsData.map(report => getUserById(report.userId))
-        );
+        // Buscar a primeira imagem para cada relatório
+        const reportsWithImages = await Promise.all(reportsData.map(async (report) => {
+          let imageUrl = Geleira;
+          console.log(report.imageUrl)
+          if (report.imageUrl) {
+            const imageUrls = report.imageUrl.split(',');
+            if (imageUrls.length > 0) {
+              imageUrl = await getReportPhoto(report.id, token);
+            }
+          }
+          return { ...report, imageUrl };
+        }));
 
-        const usersMap = usersData.reduce((acc, user) => {
-          acc[user.id] = user;
-          return acc;
-        }, {});
-
-        setUsers(usersMap);
+        setReports(reportsWithImages);
       } catch (error) {
         console.error('Error fetching reports or users', error);
       }
@@ -69,16 +70,6 @@ const Sidebar = () => {
       fetchReports();
     }
   }, [isWarningOpen]);
-  const getUserTypeText = (type) => {
-    switch (type) {
-      case 0:
-        return 'Morador';
-      case 1:
-        return 'Força de Segurança';
-      default:
-        return 'Tipo desconhecido';
-    }
-  };
 
   return (
     <Flex direction={{ base: "column-reverse", md: "row" }}>
@@ -104,19 +95,14 @@ const Sidebar = () => {
                 <Center>Denuncias</Center>
               </DrawerHeader>
               <DrawerBody>
-                {reports.map((report) => {
-                  const user = users[report.userId];
-                  return (
-                    <WarningCard
-                      title={report.title}
-                      ImgSrc={report.imgUrl || Geleira} //Nem Aqui
-                      text={report.description}
-                      userImg={user?.photo || UserIcon} //Não consegui fazer as imagens serem exibidas
-                      fullName={user?.fullName || 'Usuário desconhecido'}
-                      type={getUserTypeText(user?.type)}
-                    />
-                  );
-                })}
+                {reports.map((report) => (
+                  <WarningCard
+                    key={report.id}
+                    title={report.title}
+                    ImgSrc={report.imageUrl}
+                    text={report.description}
+                  />
+                ))}
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>
@@ -133,7 +119,7 @@ const Sidebar = () => {
                 </DrawerHeader>
               </Center>
               <DrawerBody>
-                <ProfileCard/>
+                <ProfileCard />
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>
