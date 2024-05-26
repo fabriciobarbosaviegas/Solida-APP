@@ -3,9 +3,10 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { Box, Flex } from '@chakra-ui/react';
 import Search from '../Search/Search';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
-import PinDenuncia from '../../assets/PinDenuncia.svg';
 import ReportForm from '../ReportForm/ReportForm';
 import UserLocationPin from '../../assets/UserLocationPin.svg';
+import { getReports } from '../../services/ReportService';
+import MapPin from '../MapPin/MapPin'; 
 
 const mapContainerStyle = {
   width: '100%',
@@ -29,20 +30,60 @@ const Map = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
+    const storedMarkers = JSON.parse(localStorage.getItem('markers')) || [];
+    const userLocationMarker = JSON.parse(localStorage.getItem('userLocation'));
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
+          const userLocationMarker = {
+            lat: latitude,
+            lng: longitude,
+            isUserLocation: true,
+            id: 'user-location',
+          };
           setCenter({ lat: latitude, lng: longitude });
-          setMarkers([{ lat: latitude, lng: longitude, isUserLocation: true, id: 'user-location' }]);
           setZoom(16);
+          localStorage.setItem('userLocation', JSON.stringify(userLocationMarker));
+          setMarkers([userLocationMarker, ...storedMarkers]);
         },
         () => {
           setCenter({ lat: -30.6946645, lng: -51.8112358 });
           setZoom(16);
+          setMarkers([userLocationMarker, ...storedMarkers]);
         }
       );
+    } else {
+      setMarkers([userLocationMarker, ...storedMarkers]);
     }
+
+    const fetchReports = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const reports = await getReports(token);
+
+        const reportMarkers = reports.map((report) => {
+          const cords = JSON.parse(report.cords);
+          return {
+            lat: cords.lat,
+            lng: cords.lng,
+            id: report.id,
+            title: report.title,
+            ImgSrc: report.ImgSrc,
+            text: report.text,
+            myReports: report.myReports,
+          };
+        });
+
+        setMarkers((prevMarkers) => [...prevMarkers, ...reportMarkers]);
+        localStorage.setItem('markers', JSON.stringify([...storedMarkers, ...reportMarkers]));
+      } catch (error) {
+        console.error('Error fetching reports', error);
+      }
+    };
+
+    fetchReports();
   }, []);
 
   const handleMapClick = (event) => {
@@ -72,19 +113,32 @@ const Map = () => {
   };
 
   const handleMarkerClick = (id) => {
-    if(id !== 'user-location'){
-      setMarkers((current) => current.filter((marker) => marker.id !== id));
+    if (id !== 'user-location') {
+      const updatedMarkers = markers.filter((marker) => marker.id !== id);
+      setMarkers(updatedMarkers);
+      localStorage.setItem('markers', JSON.stringify(updatedMarkers));
     }
   };
 
   const handleFormSubmit = (report) => {
-    setMarkers((current) => [...current, newMarker]);
+    const cords = JSON.parse(report.cords);
+    const newReportMarker = {
+      lat: cords.lat,
+      lng: cords.lng,
+      id: report.id,
+      title: report.title,
+      ImgSrc: report.ImgSrc,
+      text: report.text,
+      myReports: report.myReports,
+    };
+
+    const updatedMarkers = [...markers, newReportMarker];
+    setMarkers(updatedMarkers);
+    localStorage.setItem('markers', JSON.stringify(updatedMarkers));
     setIsFormOpen(false);
     setNewMarker(null);
-    // lógica para salvar a denúncia no banco de dados
     console.log('Denúncia registrada:', report);
   };
-
 
   return (
     <LoadScript googleMapsApiKey={process.env.apiKey} libraries={libraries}>
@@ -100,14 +154,27 @@ const Map = () => {
         options={mapOptions}
         onClick={handleMapClick}
       >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.id}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            icon={marker.isUserLocation ? UserLocationPin : PinDenuncia}
-            onClick={marker.id !== 'user-location' ? () => handleMarkerClick(marker.id) : handleMapClick}
-          />
-        ))}
+        {markers.map((marker) =>
+          marker.isUserLocation ? (
+            <Marker
+              key={marker.id}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              icon={UserLocationPin}
+            />
+          ) : (
+            <MapPin
+              key={marker.id}
+              latitude={marker.lat}
+              longitude={marker.lng}
+              reportId={marker.id}
+              title={marker.title}
+              ImgSrc={marker.ImgSrc}
+              text={marker.text}
+              myReports={marker.myReports}
+              onClick={() => handleMarkerClick(marker.id)}
+            />
+          )
+        )}
       </GoogleMap>
       <ConfirmationModal
         isOpen={isModalOpen}
