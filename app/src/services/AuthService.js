@@ -86,6 +86,7 @@ export const getPhotoByUserId = async (id) => {
         Authorization: `Bearer ${currentUser}`,
       },
     });
+    console.log(response)
     return URL.createObjectURL(response.data); // Create a URL for the binary data
   } catch (error) {
     throw error.response ? error.response.data : new Error('Network error');
@@ -95,6 +96,23 @@ export const getPhotoByUserId = async (id) => {
 export const deleteUser = async (id) => {
   try {
     const token = localStorage.getItem('token');
+
+    const reportsResponse = await axios.get(`${API_URL}/report`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const userReports = reportsResponse.data.filter(report => report.userId === id);
+
+    for (const report of userReports) {
+      await axios.delete(`${API_URL}/report/${report.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    }
+
     const response = await axios.delete(`${API_URL}/user/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`
