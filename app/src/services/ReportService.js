@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://solida-app-lb1t.onrender.com';
+const API_URL = 'https://solida-app-lb1t.onrender.com'; 
 
 export const createReport = async (reportData, token) => {
   try {
