@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Text, Card, Button, CardBody, CardFooter, Stack, Heading, Center, useToast } from '@chakra-ui/react';
+import { Box, Text, Card, Button, CardBody, CardFooter, Stack, Heading, Center, useToast } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
-import Local from '../../assets/Local.svg';
 import { deleteReport } from '../../services/ReportService';
 import { createVolunteer, deleteVolunteerByUserIdAndReportId } from '../../services/VolunteerService';
 
-const WarningCard = ({ reportId, title, ImgSrc, text, myReports }) => {
+const WarningCard = ({ reportId, title, ImgSrc, text, myReports, mapPin }) => {
   const toast = useToast();
   const userId = localStorage.getItem('userId');
   const [isVolunteered, setIsVolunteered] = useState(false);
@@ -121,17 +120,9 @@ const WarningCard = ({ reportId, title, ImgSrc, text, myReports }) => {
               >
                 Marcar como resolvido
               </Button>
-              <Button
-                colorScheme='red'
-                variant='outline'
-                justifyContent="space-between"
-                leftIcon={<Image src={Local} />}
-              >
-                Ver no Mapa
-              </Button>
             </>
           ) : (
-            <>
+              <>
               <Button
                 mr={3}
                 colorScheme='green'

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Spacer, useBreakpointValue, Flex, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Center } from '@chakra-ui/react';
+import { Box, Spacer, useBreakpointValue, Flex, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Center, Spinner } from '@chakra-ui/react';
 import WarningCard from '../WarningCard/WarningCard';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import Icon from '../Icon/Icons';
@@ -40,10 +40,12 @@ const Sidebar = () => {
   const { isOpen: isProfileOpen, onOpen: onProfileOpen, onClose: onProfileClose } = useDisclosure();
 
   const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
+        setLoading(true);
         const token = localStorage.getItem('token');
         const reportsData = await getReports(token);
 
@@ -62,6 +64,8 @@ const Sidebar = () => {
         setReports(reportsWithImages);
       } catch (error) {
         console.error('Error fetching reports or users', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -94,15 +98,21 @@ const Sidebar = () => {
                 <Center>Denuncias</Center>
               </DrawerHeader>
               <DrawerBody>
-                {reports.map((report) => (
-                  <WarningCard
-                    reportId={report.id}
-                    title={report.title}
-                    ImgSrc={report.imageUrl}
-                    text={report.description}
-                    myReports={false}
-                  />
-                ))}
+                {loading ? (
+                  <Center h='100%'><Spinner color='red.500' size='xl' /></Center>
+                ) : (
+                  reports.map((report) => (
+                    <WarningCard
+                      key={report.id}  // Adicionei a key para evitar erros de React
+                      reportId={report.id}
+                      title={report.title}
+                      ImgSrc={report.imageUrl}
+                      text={report.description}
+                      myReports={false}
+                      mapPin={false}
+                    />
+                  ))
+                )}
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>

@@ -3,13 +3,13 @@ import { Marker, InfoWindow } from '@react-google-maps/api';
 import WarningCard from '../WarningCard/WarningCard';
 import PinDenuncia from '../../assets/PinDenuncia.svg';
 
-const MapPin = ({ latitude, longitude, reportId, title, ImgSrc, text, myReports, onClick }) => {
+const MapPin = ({ latitude, longitude, reportId, title, ImgSrc, text, myReports, mapPin, onClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleOpen = () => {
     setIsOpen(!isOpen);
   };
-  
+
   return (
     <Marker
       position={{ lat: latitude, lng: longitude }}

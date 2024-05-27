@@ -185,6 +185,7 @@ const Map = () => {
               ImgSrc={marker.ImgSrc}
               text={marker.text}
               myReports={marker.myReports}
+              mapPin={true}
               onClick={() => handleMarkerClick(marker.id)}
             />
           )
