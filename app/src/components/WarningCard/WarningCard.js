@@ -25,12 +25,13 @@ const WarningCard = ({ reportId, title, ImgSrc, text, myReports }) => {
       console.log('Deleting report with ID:', reportId);
       await deleteReport(reportId);
       toast({
-        title: 'Report resolved.',
-        description: 'The report has been marked as resolved.',
+        title: 'Denúncia resolvida',
+        description: 'Essa ação será apagada.',
         status: 'success',
         duration: 5000,
         isClosable: true,
       });
+      window.location.reload();
     } catch (error) {
       console.error('Error resolving report:', error);
       toast({
@@ -49,17 +50,17 @@ const WarningCard = ({ reportId, title, ImgSrc, text, myReports }) => {
       setIsVolunteered(true);
       localStorage.setItem(`volunteerStatus_${userId}_${reportId}`, 'true');
       toast({
-        title: 'Volunteered successfully.',
-        description: 'You have volunteered for this report.',
+        title: 'Voluntariado com sucesso',
+        description: 'Você é voluntario nessa ação',
         status: 'success',
         duration: 5000,
         isClosable: true,
       });
     } catch (error) {
-      console.error('Error volunteering:', error);
+      console.error('Erro ao se voluntariar', error);
       toast({
-        title: 'Error.',
-        description: error.message || 'An error occurred while volunteering.',
+        title: 'Erro',
+        description: error.message || 'Erro ao se voluntariar',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -73,8 +74,8 @@ const WarningCard = ({ reportId, title, ImgSrc, text, myReports }) => {
       setIsVolunteered(false);
       localStorage.setItem(`volunteerStatus_${userId}_${reportId}`, 'false');
       toast({
-        title: 'Unvolunteered successfully.',
-        description: 'You have unvolunteered for this report.',
+        title: 'Voluntariado desfeito',
+        description: 'Você deixou de ser voluntario nessa ação',
         status: 'success',
         duration: 5000,
         isClosable: true,
@@ -82,8 +83,8 @@ const WarningCard = ({ reportId, title, ImgSrc, text, myReports }) => {
     } catch (error) {
       console.error('Error unvolunteering:', error);
       toast({
-        title: 'Error.',
-        description: error.message || 'An error occurred while unvolunteering.',
+        title: 'Erro.',
+        description: error.message || 'Um erro ocorreu.',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -141,14 +142,6 @@ const WarningCard = ({ reportId, title, ImgSrc, text, myReports }) => {
                 onClick={isVolunteered ? handleUnvolunteer : handleVolunteer}
               >
                 {isVolunteered ? 'Desmarcar voluntariado' : 'Voluntariar'}
-              </Button>
-              <Button
-                colorScheme='red'
-                variant='outline'
-                justifyContent="space-between"
-                leftIcon={<Image src={Local} />}
-              >
-                Ver no Mapa
               </Button>
             </>
           )}

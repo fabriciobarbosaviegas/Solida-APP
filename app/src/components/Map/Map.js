@@ -5,8 +5,9 @@ import Search from '../Search/Search';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import ReportForm from '../ReportForm/ReportForm';
 import UserLocationPin from '../../assets/UserLocationPin.svg';
-import { getReports } from '../../services/ReportService';
+import { getReports, getReportPhoto } from '../../services/ReportService';
 import MapPin from '../MapPin/MapPin'; 
+import Geleira from '../../assets/Geleira.png';
 
 const mapContainerStyle = {
   width: '100%',
@@ -63,18 +64,32 @@ const Map = () => {
         const token = localStorage.getItem('token');
         const reports = await getReports(token);
 
-        const reportMarkers = reports.map((report) => {
+        const reportMarkers = await Promise.all(reports.map(async (report) => {
           const cords = JSON.parse(report.cords);
+          
+          let imageUrl = Geleira;
+
+          if (report.imageUrl) {
+            const imageUrls = report.imageUrl.split(',');
+            if (imageUrls.length > 0) {
+              try {
+                imageUrl = await getReportPhoto(report.id, token);
+              } catch (error) {
+                console.error(`Error fetching image for report ${report.id}`, error);
+              }
+            }
+          }
+
           return {
             lat: cords.lat,
             lng: cords.lng,
             id: report.id,
             title: report.title,
-            ImgSrc: report.ImgSrc,
+            ImgSrc: imageUrl,
             text: report.text,
             myReports: report.myReports,
           };
-        });
+        }));
 
         setMarkers((prevMarkers) => [...prevMarkers, ...reportMarkers]);
         localStorage.setItem('markers', JSON.stringify([...storedMarkers, ...reportMarkers]));

@@ -122,6 +122,7 @@ const ReportForm = ({ isOpen, onClose, initialLocation }) => {
           isClosable: true,
         });
         onClose();
+        window.location.reload();
       }
       else {
         toast({

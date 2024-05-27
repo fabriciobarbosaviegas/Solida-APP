@@ -9,7 +9,7 @@ const MapPin = ({ latitude, longitude, reportId, title, ImgSrc, text, myReports,
   const handleToggleOpen = () => {
     setIsOpen(!isOpen);
   };
-
+  
   return (
     <Marker
       position={{ lat: latitude, lng: longitude }}
