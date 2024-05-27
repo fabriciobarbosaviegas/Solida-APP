@@ -152,11 +152,10 @@ const Map = () => {
     localStorage.setItem('markers', JSON.stringify(updatedMarkers));
     setIsFormOpen(false);
     setNewMarker(null);
-    console.log('Denúncia registrada:', report);
   };
 
   return (
-    <LoadScript googleMapsApiKey={process.env.apiKey} libraries={libraries}>
+    <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY} libraries={libraries}>
       <Flex justify="flex-end">
         <Box position="absolute" top="10px" right="10px" zIndex="1">
           <Search onLoad={(autocomplete) => setAutocomplete(autocomplete)} onPlaceChanged={handlePlaceSelect} size="sm" />

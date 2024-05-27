@@ -44,9 +44,6 @@ const ProfileCard = () => {
       setLoadingReports(true);
       try {
         const userReports = await getUserReports(currentUser);
-        console.log(userReports)
-
-        // Buscar a primeira imagem para cada relatório
         const token = localStorage.getItem('token');
         const reportsWithImages = await Promise.all(userReports.map(async (report) => {
           let imageUrl = Geleira;

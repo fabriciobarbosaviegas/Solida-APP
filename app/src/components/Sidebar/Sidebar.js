@@ -50,7 +50,6 @@ const Sidebar = () => {
         // Buscar a primeira imagem para cada relatório
         const reportsWithImages = await Promise.all(reportsData.map(async (report) => {
           let imageUrl = Geleira;
-          console.log(report.imageUrl)
           if (report.imageUrl) {
             const imageUrls = report.imageUrl.split(',');
             if (imageUrls.length > 0) {

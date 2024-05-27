@@ -22,7 +22,6 @@ const WarningCard = ({ reportId, title, ImgSrc, text, myReports }) => {
 
   const handleDelete = async () => {
     try {
-      console.log('Deleting report with ID:', reportId);
       await deleteReport(reportId);
       toast({
         title: 'Denúncia resolvida',
